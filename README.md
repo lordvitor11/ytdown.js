@@ -81,7 +81,7 @@ python3 main.pyw
 
 ## Problemas comuns:
 
-Caso tenha algum problema durante a instalação das dependências, instale manualmente. Para isso, abra seu terminal ou prompt de comando(cmd/powershell) e digite os seguinte comando: 
+Caso tenha algum problema durante a instalação das dependências, instale manualmente. Para isso, abra seu terminal ou prompt de comando(cmd/powershell) e digite o seguinte comando: 
 
 ```
 pip install tkinter, pytube, moviepy, customtkinter, typing-extensions, darkdetect
