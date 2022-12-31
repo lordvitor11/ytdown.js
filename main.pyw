@@ -1,183 +1,245 @@
-import re, os, time, tkinter.filedialog, tkinter.messagebox;
-import moviepy.editor as mp;
-from pytube import YouTube, Playlist;
-from tkinter import *
+import os, subprocess, sys, threading, tkinter, tkinter.messagebox, customtkinter;
 
-urls = [];
+customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
+customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
-class Application:
-    def __init__(self, master=None):
-        self.fontePadrao = ("Arial", "10")
-        self.primeiroContainer = Frame(master)
-        self.primeiroContainer["pady"] = 10
-        self.primeiroContainer.pack()
+class App(customtkinter.CTk):
+    def __init__(self):
+        super().__init__()
 
-        self.segundoContainer = Frame(master)
-        self.segundoContainer["padx"] = 20
-        self.segundoContainer.pack()
+        # configure window
+        self.title("ytdown.py")
+        self.geometry(f"{1100}x{580}")
 
-        self.terceiroContainer = Frame(master)
-        self.terceiroContainer["padx"] = 20
-        self.terceiroContainer.pack()
+        # configure grid layout (4x4)
+        self.grid_columnconfigure(1, weight=1)
+        self.grid_columnconfigure((2, 3), weight=0)
+        self.grid_rowconfigure((0, 1, 2), weight=1)
 
-        self.quartoContainer = Frame(master)
-        self.quartoContainer["pady"] = 20
-        self.quartoContainer.pack()
+        self.sidebar_frame = customtkinter.CTkFrame(self, width=140, corner_radius=0)
+        self.sidebar_frame.grid(row=0, column=0, rowspan=4, sticky="nsew")
+        self.sidebar_frame.grid_rowconfigure(4, weight=1)
 
-        self.titulo = Label(self.primeiroContainer, text="")
-        self.titulo["font"] = ("Arial", "10", "bold")
-        self.titulo.pack()
+        self.logo_label = customtkinter.CTkLabel(self.sidebar_frame, text="Criador:", font=customtkinter.CTkFont(size=20, weight="bold"))
+        self.logo_label.grid(row=0, column=0, padx=20, pady=(20, 10))
+        self.sidebar_button_1 = customtkinter.CTkButton(self.sidebar_frame, text = "YouTube", command=lambda:self.sidebar_button_event(1))
+        self.sidebar_button_1.grid(row=1, column=0, padx=20, pady=10)
+        self.sidebar_button_2 = customtkinter.CTkButton(self.sidebar_frame, text = "GitHub", command=lambda:self.sidebar_button_event(2))
+        self.sidebar_button_2.grid(row=2, column=0, padx=20, pady=10)
+        self.sidebar_button_3 = customtkinter.CTkButton(self.sidebar_frame, text = "Instagram", command=lambda:self.sidebar_button_event(3))
+        self.sidebar_button_3.grid(row=3, column=0, padx=20, pady=10)
+        self.appearance_mode_label = customtkinter.CTkLabel(self.sidebar_frame, text="Aparência:", anchor="w")
+        self.appearance_mode_label.grid(row=5, column=0, padx=20, pady=(10, 0))
+        self.appearance_mode_optionemenu = customtkinter.CTkOptionMenu(self.sidebar_frame, values=["Claro", "Escuro", "Sistema"],
+                                                                       command=self.change_appearance_mode_event)
+        self.appearance_mode_optionemenu.grid(row=6, column=0, padx=20, pady=(10, 10))
+    
 
-        self.configRaw = open("./src/config.txt", "r");
-        self.historyRaw = open("src/history.txt", "r");
-        self.config = [linha for linha in self.configRaw];
-        self.history = [linha for linha in self.historyRaw];
-       
+        self.appearance_mode_optionemenu.set("Sistema")
+        self.edited = False;
+        self.urls = [];
+
         self.preVerify();
+        
+        # create sidebar frame with widgets
+
+    def sidebar_button_event(self, button):
+        match (button):
+            case 1: button = "https://www.youtube.com/c/lordvitor11";
+            case 2: button = "https://www.github.com/lordvitor11"; 
+            case 3: button = "https://www.instagram.com/whoslv_";
+
+        os.system(f'start "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" "{button}"');
+
+
+    def change_appearance_mode_event(self, new_appearance_mode: str):
+        match (new_appearance_mode):
+            case "Claro": new_appearance_mode = "light";
+            case "Escuro": new_appearance_mode = "dark";
+            case "Sistema": new_appearance_mode = "system";
+
+        customtkinter.set_appearance_mode(new_appearance_mode)
 
 
     def preVerify(self):
-        dirFile = os.listdir("./src");
-
         try:
+            dirFile = os.listdir("./src");
+            self.configRaw = open("./src/config.txt", "r");
+            self.config = [linha for linha in self.configRaw];
+        except FileNotFoundError:
+            tkinter.messagebox.showwarning("ERRO", "Instale as dependências antes de começar, tutorial na página do github: lordvitor11");
+            quit();
+
+        try: 
             if (str(self.config[1]) != ""):
-                self.gotoMenu();
+                self.mainScreen();
         except IndexError:
             if (len(dirFile) > 1):
-                self.gotoSetup();
+                self.configScreen();
             else:
                 tkinter.messagebox.showwarning("ERRO", "Instale as dependências antes de começar, tutorial na página do github: lordvitor11");
                 quit();
-
-
-    def setupConfig(self):
-        root.directory = tkinter.filedialog.askdirectory();
-        self.mensagem2["text"] = f"Caminho: {root.directory}";
-        self.rDict = root.directory;
-        
-            
-    def addValues(self):
-        mUrl = self.url.get();
-        if (mUrl != "" and mUrl != None and not mUrl in urls):
-            if (str(mUrl) in self.history):
-                self.mensagem["text"] = "Música já baixada";
-            else:
-                self.mensagem["text"] = "Música adicionada!";
-                urls.append(mUrl);
-                self.history.append(mUrl);
-                self.url.delete(0, "end");
-        else:
-            self.mensagem["text"] = "";
-
     
-    def gotoSetup(self):
-        def unpackAll():
-            self.mensagem.destroy();
-            self.mensagem2.destroy();
-            self.add.destroy();
-            self.autenticar.destroy();
-            self.gotoMenu();
 
-        self.titulo["text"] = "Escolha o local para baixar as músicas";
-
-        self.mensagem = Label(self.terceiroContainer, text="Caso o caminho não esteja correto, adicione novamente", font=self.fontePadrao);
-        self.mensagem2 = Label(self.terceiroContainer, text="", font=self.fontePadrao);
-        self.mensagem.pack();
-        self.mensagem2.pack();
-
-        self.add = Button(self.segundoContainer)
-        self.add["text"] = "Escolha";
-        self.add["font"] = ("Calibri", "8");
-        self.add["width"] = 12;
-        self.add["command"] = lambda: self.setupConfig(); #self.mensagem.pack();    
-        self.add.pack()
-
-        self.autenticar = Button(self.quartoContainer)
-        self.autenticar["text"] = "Prosseguir"
-        self.autenticar["font"] = ("Calibri", "8")
-        self.autenticar["width"] = 12
-        self.autenticar["command"] = unpackAll; 
-        self.autenticar.pack()
+    def rootConfig(self):
+        app.directory = tkinter.filedialog.askdirectory();
+        self.entry.configure(placeholder_text = app.directory);
+        self.label2.configure(text = "*Se o caminho não estiver correto, adicione novamente");
+        self.continueBtn.configure(state = "enabled");
 
 
-    def gotoMenu(self):
-        def unpackAll():
-            self.url.destroy();
-            self.add.destroy();
-            self.autenticar.destroy();
-            self.mensagem.destroy();
-            self.gotoDownload();
-
-        self.titulo["text"] = "Digite os links das músicas";
-
-        self.url = Entry(self.segundoContainer)
-        self.url["width"] = 30
-        self.url["font"] = self.fontePadrao
-        self.url.pack(side=LEFT)
-
-        self.add = Button(self.segundoContainer)
-        self.add["text"] = "Adicionar";
-        self.add["font"] = ("Calibri", "8");
-        self.add["width"] = 12;
-        self.add["command"] = self.addValues;        
-        self.add.pack()
-
-        self.autenticar = Button(self.quartoContainer)
-        self.autenticar["text"] = "Baixar"
-        self.autenticar["font"] = ("Calibri", "8")
-        self.autenticar["width"] = 12
-        self.autenticar["command"] = unpackAll;
-        self.autenticar.pack()
-
-        self.mensagem = Label(self.terceiroContainer, text="", font=self.fontePadrao)
-        self.mensagem.pack()
-
-
-    def gotoDownload(self):
-        self.titulo["text"] = "Downloads concluidos";
-
-        self.autenticar = Button(self.quartoContainer)
-        self.autenticar["text"] = "Sair"
-        self.autenticar["font"] = ("Calibri", "8")
-        self.autenticar["width"] = 12
-        self.autenticar["command"] = lambda:quit();
-        self.autenticar.pack()
-          
-        self.downloadVideo();
-
-    def downloadVideo(self):
-        if (len(self.config) == 1):
-            self.config.append(root.directory);
-            
-            self.configRaw = open("./src/config.txt", "w");
-            for c in range(len(self.config)): self.configRaw.write(f"{self.config[c]}\n");
-
-        for link in urls:
-            yt = YouTube(link);
-            ys = yt.streams.filter(only_audio=True).first().download("./downloads");
-
-        for file in os.listdir("./downloads"):          
-            if re.search('mp4', file):                                     
-                mp4_path = os.path.join("./downloads" , file);
-                mp3_path = os.path.join("./downloads", os.path.splitext(file)[0]+'.mp3');
-                new_file = mp.AudioFileClip(mp4_path);  
-                new_file.write_audiofile(mp3_path);     
-                os.remove(mp4_path);
-
-        if ("win" in self.config[0]):
-            os.system(f"move downloads\*.mp3 {str(self.config[1])}")
+    def addValues(self):
+        mUrl = self.entry.get();
+        if (mUrl != "" and mUrl != None and not mUrl in self.urls):
+            self.entry.delete(0, "end");
+            tkinter.messagebox.showinfo("", "Música adicionada!");
+            self.urls.append(mUrl);
         else:
-            os.system(f"mv downloads/*.mp3 {str(self.config[1])}")
+            tkinter.messagebox.showinfo("", "Música já adicionada anteriormente!");
+            self.entry.configure(placeholder_text = "");
 
+
+    def configScreen(self):
+        def unpackAll():
+            config = open("./src/config.txt", "a");
+            config.write(f"\n{app.directory}");
+
+            self.label.destroy();
+            self.label2.destroy();
+            self.entry.destroy();
+            self.pathBtn.destroy();
+            self.continueBtn.destroy();
+            self.mainScreen();
+
+        self.label = customtkinter.CTkLabel(self, text="Escolha o local para baixar as músicas:", font = customtkinter.CTkFont(size=20, weight="bold"));
+        self.label.grid(row=0, column=1, columnspan = 2, padx=(20, 0), pady=(20, 20), sticky = "nsew");
+
+        self.label2 = customtkinter.CTkLabel(self, text = "", font = customtkinter.CTkFont(size = 15, weight = "bold"));
+        self.label2.grid(row = 2, column = 1, columnspan = 2, padx=(20, 0), pady=(20, 20), sticky = "nsew");
+
+        self.entry = customtkinter.CTkEntry(self, placeholder_text="", width = 450)
+        self.entry.grid(row=1, column=1, columnspan=2, padx=(20, 100), pady=(20, 20))
+
+        self.pathBtn = customtkinter.CTkButton(master = self, text = "Clique", fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), width=80, command=self.rootConfig)
+        self.pathBtn.grid(row=1, column=2, padx=(0, 200), pady=(20, 20))
+
+        self.continueBtn = customtkinter.CTkButton(master = self, text = "Continuar", fg_color = "transparent", border_width = 2, text_color=("gray10", "#DCE4EE"), command=lambda:unpackAll());
+        self.continueBtn.grid(row = 3, column = 2, padx = 0, pady = (20, 20));        
+        self.continueBtn.configure(state = "disabled");
+
+
+    def mainScreen(self):
+        def unpackAll():
+            self.label.destroy();
+            self.label2.destroy();
+            self.entry.destroy();
+            self.linkBtn.destroy();
+            self.downBtn.destroy();
+            self.editBtn.destroy();
+            self.quitBtn.destroy();
+            self.btnFrame.destroy();
+            self.downScreen()
+
+        def edit():
+            app.directory = tkinter.filedialog.askdirectory();
+            self.label2.configure(text = app.directory);
+            self.edited = True if app.directory != "" else False;
+
+            if (self.edited):
+                self.config.pop();
+                self.config.append(app.directory);
+                self.configRaw = open("./src/config.txt", "w");
+                for c in range(len(self.config)): self.configRaw.write(f"{self.config[c]}");
+                self.configRaw.close();
+
+        self.label = customtkinter.CTkLabel(self, text="Adicione os links das músicas e clique em baixar", font = customtkinter.CTkFont(size=20, weight="bold"));
+        self.label.grid(row=0, column=1, columnspan = 2, padx=(20, 0), pady=(20, 20), sticky = "nsew");
+
+        self.label2 = customtkinter.CTkLabel(self, text="", font = customtkinter.CTkFont(size=20, weight="bold"));
+        self.label2.grid(row=2, column=1, columnspan = 2, padx=(20, 0), pady=(20, 20), sticky = "nsew");
+
+        self.entry = customtkinter.CTkEntry(self, placeholder_text="", width = 450);
+        self.entry.grid(row=1, column=1, columnspan=2, padx=(20, 100), pady=(20, 20))
+
+        self.linkBtn = customtkinter.CTkButton(master = self, text = "Adicionar", fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), width=80, command=self.addValues);
+        self.linkBtn.grid(row=1, column=2, padx=(0, 200), pady=(20, 20));
+
+        self.btnFrame = customtkinter.CTkFrame(self)
+        self.btnFrame.grid(row=3, column=2, padx=(20, 20), pady=(20, 0))
+
+        self.downBtn = customtkinter.CTkButton(master = self.btnFrame, text = "Baixar", fg_color = "transparent", border_width = 2, text_color=("gray10", "#DCE4EE"), width=173, command=unpackAll);
+        self.downBtn.grid(row = 3, column=1, padx=0, pady = (20, 60), sticky="s");
+
+        self.editBtn = customtkinter.CTkButton(master = self.btnFrame, text = "Editar caminho de download", fg_color = "transparent", border_width = 2, text_color=("gray10", "#DCE4EE"), command=edit);
+        self.editBtn.grid(row = 3, column = 1, padx = 0, pady = (20, 30), sticky="s");
+
+        self.quitBtn = customtkinter.CTkButton(master = self.btnFrame, text = "Sair", fg_color = "transparent", border_width = 2, text_color=("gray10", "#DCE4EE"), width=173, command=lambda:quit());
+        self.quitBtn.grid(row = 3, column = 1, padx = 0, pady = (20, 0), sticky="s");
+
+
+    def downScreen(self):
+        downRaw = open("./src/downloads.txt", "a");
+
+        for item in self.urls:
+            downRaw.write(f"{item}\n");
+
+        downRaw.close();
+
+        self.label = customtkinter.CTkLabel(self, text="Baixando músicas... Aguarde", font = customtkinter.CTkFont(size=20, weight="bold"));
+        self.label.grid(row=0, column=1, columnspan = 2, padx=(20, 0), pady=(20, 20), sticky = "nsew");
+
+        self.label2 = customtkinter.CTkLabel(self, text="*Avisaremos quando terminar, não feche o aplicativo até lá", font = customtkinter.CTkFont(size=10, weight="bold"));
+        self.label2.grid(row=1, column=1, columnspan = 2, padx=(20, 0), pady=(20, 20), sticky = "nsew");
+
+        self.btnFrame = customtkinter.CTkFrame(self)
+        self.btnFrame.grid(row=3, column=2, padx=(20, 20), pady=(20, 0))
+
+        self.downBtn = customtkinter.CTkButton(master = self.btnFrame, text = "Abrir pasta", fg_color = "transparent", border_width = 2, text_color=("gray10", "#DCE4EE"), width=173);
+        self.downBtn.grid(row = 3, column=1, padx=0, pady = (20, 60), sticky="s");
+
+        self.quitBtn = customtkinter.CTkButton(master = self.btnFrame, text = "Sair", fg_color = "transparent", border_width = 2, text_color=("gray10", "#DCE4EE"), width=173, command=lambda:quit());
+        self.quitBtn.grid(row = 3, column = 1, padx = 0, pady = (20, 0), sticky="s");
+
+        self.downBtn.configure(state = "disabled");
+        self.quitBtn.configure(state = "disabled");
+
+        threading.Thread(target=self.downScreen2).start();
+
+    def downScreen2(self):
+        def openDir():
+            configRaw = open("./src/config.txt");
+            config = [item for item in configRaw];
+            config = config[1];
+            print(config)
+            configRaw.close();
+
+            if ("win" in so):
+                config = config.replace("/", "\\")
+                os.system(f"explorer {config}");
+            else:
+                try:
+                    os.system(f"nautilus {config}");
+                except:
+                    os.system(f"nemo {config}");
+
+        configRaw = open("./src/config.txt", "r");
+        config = [item for item in configRaw];
+        so = config[0];
+
+        os.system("python download.pyw");
+
+        if ("win" in so):        
+            os.system(r'del ".\src\complete.txt"');
+        else:
+            os.system("rm ./src/complete.txt");
+
+        self.downBtn.configure(command = openDir);
+        self.downBtn.configure(state = "enabled");
+        self.quitBtn.configure(state = "enabled");
+
+        tkinter.messagebox.showinfo("Concluído", "Todas as músicas foram baixadas!");
         
-        self.historyRaw = open("src/history.txt", "w");
-        for item in self.history:
-            self.historyRaw.write(f"{item}\n");
 
-        self.configRaw.close();
-        self.historyRaw.close();
-
-
-root = Tk();
-Application(root);
-root.mainloop();
+if __name__ == "__main__":
+    app = App()
+    app.mainloop()
