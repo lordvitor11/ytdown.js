@@ -41,15 +41,20 @@ class App(customtkinter.CTk):
 
         self.preVerify();
         
-        # create sidebar frame with widgets
-
     def sidebar_button_event(self, button):
         match (button):
             case 1: button = "https://www.youtube.com/c/lordvitor11";
             case 2: button = "https://www.github.com/lordvitor11"; 
             case 3: button = "https://www.instagram.com/whoslv_";
 
-        os.system(f'start "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" "{button}"');
+        config = open("./src/config.txt");
+        so = [item for item in config]
+        so = so[0];
+
+        if ("win" in so):
+            os.system(f'start "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" "{button}"');
+        else:
+            threading.Thread(target=lambda:os.system(f'firefox "{button}"')).start();
 
 
     def change_appearance_mode_event(self, new_appearance_mode: str):
@@ -218,15 +223,18 @@ class App(customtkinter.CTk):
                 os.system(f"explorer {config}");
             else:
                 try:
-                    os.system(f"nautilus {config}");
-                except:
                     os.system(f"nemo {config}");
+                except:
+                    os.system(f"thunar {config}");
 
         configRaw = open("./src/config.txt", "r");
         config = [item for item in configRaw];
         so = config[0];
 
-        os.system("python download.pyw");
+        if ("win" in so):
+            os.system("python download.pyw");
+        else:
+            os.system("python3 download.pyw");
 
         if ("win" in so):        
             os.system(r'del ".\src\complete.txt"');

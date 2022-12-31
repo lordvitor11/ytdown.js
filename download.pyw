@@ -22,7 +22,7 @@ for file in os.listdir("./downloads"):
 if ("win" in config[0]):
     os.system(f"move downloads\*.mp3 {str(config[1])}");
 else:
-    os.system(f"mv downloads/*.mp3 {str(config[1])}");
+    os.system(f"mv ./downloads/*.mp3 {str(config[1])}");
 
 urlsRaw = open("./src/downloads.txt", "w");
 urlsRaw.write("");
