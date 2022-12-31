@@ -22,6 +22,9 @@ Obs: na instalação do python, lembre-se de marcar a opção "Adicionar o pytho
   - tkinter
   - pytube
   - moviepy
+  - customtkinter
+  - darkdetect
+  - typing-extensions
 
 [python-link]: https://www.python.org/
 
@@ -75,6 +78,14 @@ python3 main.pyw
     <img title="Git" align="center" alt="LV-GIT" height="30" width="40" src="https://raw.githubusercontent.com/jmnote/z-icons/master/svg/git.svg">
     <img title="GitHub" align="center" alt="LV-GITHUB" height="30" width="40" src="https://raw.githubusercontent.com/jmnote/z-icons/master/svg/github.svg">
 </div>
+
+## Problemas comuns:
+
+Caso tenha algum problema durante a instalação das dependências, instale manualmente. Para isso, abra seu terminal ou prompt de comando(cmd/powershell) e digite os seguinte comando: 
+
+```
+pip install tkinter, pytube, moviepy, customtkinter, typing-extensions, darkdetect
+```
 
 </br></br>
 
