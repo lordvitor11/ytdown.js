@@ -19,8 +19,8 @@ def installDep():
             choice = int(input("> "));
 
             match (choice):
-                case 1: distro = "apt-get install"; break; 
-                case 2: distro = "pacman -S"; break;
+                case 1: distro = "sudo apt-get install"; break; 
+                case 2: distro = "sudo pacman -S"; break;
                 case 3: break;
                 case _: print("Opção inválida"); time.sleep(2); os.system("clear"); 
 
