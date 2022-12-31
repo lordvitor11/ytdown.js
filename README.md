@@ -32,8 +32,10 @@ Obs: na instalação do python, lembre-se de marcar a opção "Adicionar o pytho
 
 ### Downloads:
 
- - Linux: [download](https://github.com/lordvitor11/ytdown.py/files/10305736/ytdownpy.zip)
  - Windows: [download](https://github.com/lordvitor11/ytdown.py/files/10327626/ytdownpy.zip)
+ - Linux: [download](https://github.com/lordvitor11/ytdown.py/files/10328002/ytdownpy.zip)
+
+ *Recomendado usar git clone
 
 
 ### Suporte Linux
