@@ -58,12 +58,12 @@ Após instalar as dependências, execute o arquivo principal:
 
 ### Windows
 ```
-python main.py
+python main.pyw
 ```
 
 ### Linux
 ```
-python3 main.py
+python3 main.pyw
 ```
 
 
