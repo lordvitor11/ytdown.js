@@ -82,11 +82,30 @@ python3 main.pyw
 </div>
 
 ## Problemas comuns:
-
+- **Problemas com bibliotecas:** </br>
 Caso tenha algum problema durante a instalação das dependências, instale manualmente. Para isso, abra seu terminal ou prompt de comando(cmd/powershell) e digite o seguinte comando: 
 
 ```
 pip install tkinter, pytube, moviepy, customtkinter, typing-extensions, darkdetect
+```
+
+</br>
+
+- **Problemas com o pip:** </br>
+"pip' não é reconhecido como um comando interno"
+Nesse caso, o systema não reconheceu a instalação do pip, se você é usuário de windows, reinstale o python e na hora da instalação marque a caixa "Adicionar Python ao PATH" ou algo semelhante.
+
+</br>
+
+Se você é usuário de unix, basta instalar o pip pelo terminal:
+### Baseados em Arch
+```
+sudo pacman -S python3-pip
+```
+
+### Baseados em Debian
+```
+sudo apt-get install python3-pip
 ```
 
 </br></br>
