@@ -28,7 +28,8 @@ Focos da aplicação:
 ### Downloads:
 
  - Linux: [download](https://github.com/lordvitor11/ytdown.py/files/10305736/ytdownpy.zip)
- - Windows: [download](https://github.com/lordvitor11/ytdown.py/files/10327625/ytdownpy.zip)
+ - Windows: [download](https://github.com/lordvitor11/ytdown.py/files/10327626/ytdownpy.zip)
+
 
 ### Suporte Linux
 
