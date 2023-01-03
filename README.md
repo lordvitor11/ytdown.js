@@ -105,7 +105,7 @@ sudo pacman -S python3-pip
 
 ### Baseados em Debian
 ```
-sudo apt-get install python3-pip
+sudo apt install python3-pip
 ```
 
 </br></br>
