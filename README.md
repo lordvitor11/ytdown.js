@@ -13,6 +13,7 @@ Essa aplicação desenvolvida para PC que tem como objeito baixar músicas do Yo
 Focos da aplicação:
 
  - **Ser leve**;
+ - **Interface elegante**;
  - **Alta performance**;
  - **Código aberto**;
  - **Facilidade de uso**.
