@@ -1,10 +1,14 @@
 # ytdown.py (v1.0)
 
-<img src="app/data/icon.svg" width="128" height="128" alt="" align="right" />
-
 Essa aplicação desenvolvida para PC que tem como objeito baixar músicas do YouTube de maneira simples e rápida.
 
-![screenshot](assets/screenshot-debian-600.jpg)
+>Tema escuro
+![dark-theme](https://user-images.githubusercontent.com/65216891/210457894-7c371776-b34b-4321-93bc-f1643f4ff835.png)
+
+
+>Tema claro
+![light-theme](https://user-images.githubusercontent.com/65216891/210457897-89fe018e-d9da-4aa0-8006-ccd06b484bc6.png)
+
 
 Focos da aplicação:
 
