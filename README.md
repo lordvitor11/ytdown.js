@@ -52,7 +52,7 @@ Obs: na instalação do python, lembre-se de marcar a opção "Adicionar o pytho
 
 ## Hora de rodar
 
-Extraia o zip e rode na pasta extraída e instale as dependências:
+Extraia o zip e rode na pasta extraída o arquivo de dependências:
 
 ### Windows
 ```
@@ -97,8 +97,8 @@ pip install tkinter, pytube, moviepy, customtkinter, typing-extensions, darkdete
 </br>
 
 - **Problemas com o pip:** </br>
-"pip' não é reconhecido como um comando interno"
-Nesse caso, o systema não reconheceu a instalação do pip, se você é usuário de windows, reinstale o python e na hora da instalação marque a caixa "Adicionar Python ao PATH" ou algo semelhante.
+"pip não é reconhecido como um comando interno"
+Nesse caso, o sistema não reconheceu a instalação do pip, se você é usuário de windows, reinstale o python e na hora da instalação marque a caixa "Adicionar Python ao PATH" ou algo semelhante.
 
 </br>
 
