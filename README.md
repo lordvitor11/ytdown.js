@@ -1,6 +1,6 @@
 # ytdown.py (v1.0)
 
-Essa aplicação desenvolvida para PC que tem como objeito baixar músicas do YouTube de maneira simples e rápida.
+Essa aplicação desenvolvida para PC tem como objetivo baixar músicas do YouTube de maneira simples e rápida.
 
 >Tema escuro
 ![dark-theme](https://user-images.githubusercontent.com/65216891/210457894-7c371776-b34b-4321-93bc-f1643f4ff835.png)
