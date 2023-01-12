@@ -20,7 +20,7 @@ Focos da aplicação:
 
 ## Requisitos:
 
-**[Python][python-link] versão 3.11 ou superior;** <br>
+**[Python][python-link] versão 3.10.9 ou superior;** <br>
 Obs: na instalação do python, lembre-se de marcar a opção "Adicionar o python ao PATH"
 
 **Bibliotecas python:**
