@@ -1,0 +1,17 @@
+@import url(./style.css);
+
+div.feedback {
+    transition: all 0.35s ease;
+    opacity: 0;
+    width: 50%;
+    height: fit-content;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--main-bg);
+    border: 1px solid black;
+    text-align: center;
+}
+
+div.feedback p {
+    color: var(--destaque4);
+}
