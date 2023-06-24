@@ -17,16 +17,23 @@
         </div>
         <div class="content">
             <div class="buttons">
-                <button>Abrir pasta</button>
+                <button onclick="openDir();">Abrir pasta</button>
                 <button onclick="window.close();">Sair</button>
             </div>
 
             <div class="center">
                 <h1>Aguarde...</h1>
+                <div class="progress">
+                    <p></p>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <script type="text/javascript" src="../eel.js"></script>
     <script src="../script.js"></script>
+    <script src="../download.js"></script>
 </body>
 </html>

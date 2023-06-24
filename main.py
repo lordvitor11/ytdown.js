@@ -1,4 +1,4 @@
-import eel, os, json;
+import eel, os, json, pytube, time, random;
 from tkinter import Tk;
 from tkinter import filedialog;
 
@@ -48,6 +48,12 @@ def createJson():
 
     setJson(settings);
 
+@eel.expose
+def editPath():
+    settings = getJson();
+    settings['path'] = path;
+    setJson(settings);
+
 
 @eel.expose
 def appendLink(link):
@@ -81,9 +87,36 @@ def clearJson():
     #     outfile.write(json_object);
 
 
-if (os.path.isfile("./source/settings.json")):
-    path = "./html/index.html";
-else:
-    path = "./html/setup.html";
+@eel.expose
+def openDir():
+    settings = getJson();
+    if (settings['so'] == "win"):
+        os.system(f"explorer '{settings['path']}'");
+    else:
+        os.system(f"nemo '{settings['path']}'");
 
-eel.start(path, size = (1000, 580));
+
+@eel.expose
+def getArrayLinks():
+    settings = getJson();
+    return settings['links'];
+
+
+@eel.expose
+def getInfo(link):
+    yt = pytube.YouTube(link);
+    return f"{yt.title.strip()} - {yt.author.strip()}";
+
+
+@eel.expose
+def download(link):
+    time.sleep(random.randint(1, 5));
+    return "completo";
+
+
+if (os.path.isfile("./source/settings.json")):
+    file = "./html/index.html";
+else:
+    file = "./html/setup.html";
+
+eel.start(file, size = (1000, 580));

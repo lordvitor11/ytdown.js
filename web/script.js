@@ -45,6 +45,17 @@ function saveSettings() {
     changeScreen('index');
 }
 
+function editSettings() {
+    eel.setPath()(function (response) {
+        eel.editPath();
+        showFeedback("Caminho editado");
+    });
+}
+
+function openDir() {
+    eel.openDir();
+}
+
 function showFeedback(message) {
     let feedback = document.querySelector("div.feedback");
     let p = document.querySelector("div.feedback p");
@@ -67,5 +78,56 @@ function showFeedback(message) {
 
 function clearJson() {
     eel.clearJson();
-    changeScreen("download");
+    // changeScreen("download");
 }
+
+async function download() {
+    const tempLinks = await eel.getArrayLinks()();
+    let qtd;
+    let links = [];
+    
+    for (let item in tempLinks) {
+        const asyncResponse = async () => {
+            const result = await eel.getInfo(tempLinks[item])();
+          
+            return result;
+        }
+
+        let response = await asyncResponse();
+
+        links.push({"name" : response, "link" : tempLinks[item]});
+    }
+
+    qtd = 100 / links.length;
+
+    for (let item in links) {
+        const asyncResponse = async () => {
+            console.log(`Baixando agora ${links[item]['name']} . . .`);
+            const result = await eel.download(links[item]['link'])();
+          
+            return result;
+        }
+
+        let response = await asyncResponse();
+        console.log(response);
+        moveProgressBar(qtd);
+    }
+
+    clearJson();
+}
+
+function moveProgressBar(qtd) {
+    let progressBar = document.querySelector("div.progress-container div.progress-bar");
+    progressBar.style.width = qtd + "%";
+    // let width = 0;
+    // let interval = setInterval(frame, 2000);
+  
+    // function frame() {
+    //   if (width >= 100) {
+    //     clearInterval(interval);
+    //   } else {
+    //     width += 20;
+    //   }
+    // }
+}
+  
