@@ -1,3 +1,11 @@
+let input = document.querySelector("input#inputLink");
+
+input.addEventListener("keydown", function(event) {
+    if (event.keyCode === 13) {
+        appendLink();
+    }
+});
+
 function verifyInput() {
     let input = document.querySelector("div.t input");
     let btn = document.querySelector("button#proceed");

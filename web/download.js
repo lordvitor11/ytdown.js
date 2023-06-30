@@ -34,17 +34,19 @@ async function download() {
         w += qtd;
     }
 
+    songName.innerHTML = "Finalizado, aguarde...";
     songName.innerHTML = "Tudo pronto.";
     eel.clearJson();
 }
 
 function moveProgressBar(qtd, width) {
     let progressBar = document.querySelector("div.progress-container div.progress-bar");
-    let total = qtd + width
-    console.log("qtd: " + qtd)
-    console.log("width: " + width)
-    console.log("total:" + total)
+    let total = qtd + width;
     progressBar.style.width = total + "%";
+}
+
+function quit() {
+    window.close();
 }
 
 download();
