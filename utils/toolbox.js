@@ -23,8 +23,9 @@ async function getSongInfo(link) {
 }
 
 function createJson(path) {
+  if (process.platform === 'win32') { path = `${path}\\`; } else { path = `${path}/`; }
   let jsonUser = {
-      'caminho' : `${path}\\`
+      'caminho' : path
   };
 
   let jsonLinks = {};
