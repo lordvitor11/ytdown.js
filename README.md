@@ -1,13 +1,11 @@
-# ytdown.py (v1.0)
+# ytdown.js (v1.0)
 
 Essa aplicação desenvolvida para PC tem como objetivo baixar músicas do YouTube de maneira simples e rápida.
 
->Tema escuro
-![dark-theme](https://user-images.githubusercontent.com/65216891/210457894-7c371776-b34b-4321-93bc-f1643f4ff835.png)
+>Tela Principal
+>
+![mainpageytdownjs](https://github.com/lordvitor11/ytdown.js/assets/65216891/a7f06fad-e82a-425d-b33f-76a19613f6fa)
 
-
->Tema claro
-![light-theme](https://user-images.githubusercontent.com/65216891/210457897-89fe018e-d9da-4aa0-8006-ccd06b484bc6.png)
 
 
 Focos da aplicação:
@@ -20,99 +18,43 @@ Focos da aplicação:
 
 ## Requisitos:
 
-**[Python][python-link] versão 3.10.9 ou superior;** <br>
-Obs: na instalação do python, lembre-se de marcar a opção "Adicionar o python ao PATH"
+**Caso opte por usar a versão Source do projeto, deverá ter o [NodeJS][node-link] instalado.** <br>
 
-**Bibliotecas python:**
-  - tkinter
-  - pytube
-  - moviepy
-  - customtkinter
-  - darkdetect
-  - typing-extensions
-
-[python-link]: https://www.python.org/
+[node-link]: https://nodejs.org/en/download/
 
 ## Comece a usar:
 
 ### Downloads:
 
- - Windows(Exe): [download](https://sourceforge.net/projects/ytdown-py/files/ytdownpy.zip/download)
- - Windows(Source): [download](https://github.com/lordvitor11/ytdown.py/files/10327626/ytdownpy.zip)
- - Linux: [download](https://github.com/lordvitor11/ytdown.py/files/10328002/ytdownpy.zip)
-
- *Recomendado usar git clone
-
-
-### Suporte Linux
-
-- **Baseados em Debian**
-
-- **Baseados em Arch**
+ - Windows(Exe): [download](https://sourceforge.net/projects/ytdown-py/files/ytdown.js%20Setup%201.0.0.exe/download)
+ - Windows(Source): [download](https://github.com/lordvitor11/ytdown.js/files/14159197/download)
+  
+ - Linux(AppImage): [download](https://github.com/lordvitor11/ytdown.py/files/10328002/ytdownpy.zip)
+ - Linux(Source): [download](https://github.com/lordvitor11/ytdown.js/files/14159197/ytdown.js.zip)
 
 
-## Hora de rodar
+## Hora de rodar (Source)
 
-Extraia o zip e rode na pasta extraída o arquivo de dependências:
+Extraia o zip e rode na pasta extraída os comandos:
 
-### Windows
+### Windows && Linux
 ```
-python dependencies.py
+npm install
 ```
 
-### Linux
 ```
-python3 dependencies.py
-```
-
-<br>
-
-Após instalar as dependências, execute o arquivo principal:
-
-### Windows
-```
-python main.pyw
-```
-
-### Linux
-```
-python3 main.pyw
+npm start
 ```
 
 
 ## Tecnologias usadas:
 <div style="display: inline_block">
-  <img title="Python" align="center" alt="LV-PYTHON" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg">
-    <img title="Git" align="center" alt="LV-GIT" height="30" width="40" src="https://raw.githubusercontent.com/jmnote/z-icons/master/svg/git.svg">
-    <img title="GitHub" align="center" alt="LV-GITHUB" height="30" width="40" src="https://raw.githubusercontent.com/jmnote/z-icons/master/svg/github.svg">
+    <img src="https://skillicons.dev/icons?i=html" title="HTML">
+    <img src="https://skillicons.dev/icons?i=css" title="CSS">
+    <img src="https://skillicons.dev/icons?i=js" title="JavaScript">
+    <img src="https://skillicons.dev/icons?i=nodejs" title="Node.JS">
+    <img src="https://skillicons.dev/icons?i=git" title="Git">
 </div>
-
-## Problemas comuns:
-- **Problemas com bibliotecas:** </br>
-Caso tenha algum problema durante a instalação das dependências, instale manualmente. Para isso, abra seu terminal ou prompt de comando(cmd/powershell) e digite o seguinte comando: 
-
-```
-pip install tkinter, pytube, moviepy, customtkinter, typing-extensions, darkdetect
-```
-
-</br>
-
-- **Problemas com o pip:** </br>
-"pip não é reconhecido como um comando interno"
-Nesse caso, o sistema não reconheceu a instalação do pip, se você é usuário de windows, reinstale o python e na hora da instalação marque a caixa "Adicionar Python ao PATH" ou algo semelhante.
-
-</br>
-
-Se você é usuário de unix, basta instalar o pip pelo terminal:
-### Baseados em Arch
-```
-sudo pacman -S python3-pip
-```
-
-### Baseados em Debian
-```
-sudo apt install python3-pip
-```
 
 </br></br>
 
