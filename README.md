@@ -27,10 +27,9 @@ Focos da aplicação:
 ### Downloads:
 
  - Windows(Exe): [download](https://sourceforge.net/projects/ytdown-py/files/ytdown.js%20Setup%201.0.0.exe/download)
- - Windows(Source): [download](https://github.com/lordvitor11/ytdown.js/files/14159197/download)
-  
- - Linux(AppImage): [download](https://github.com/lordvitor11/ytdown.py/files/10328002/ytdownpy.zip)
- - Linux(Source): [download](https://github.com/lordvitor11/ytdown.js/files/14159197/ytdown.js.zip)
+ - Windows(Source): [download](https://github.com/lordvitor11/ytdown.js/files/14161338/ytdown.js.zip)
+
+ - Linux(Source): [download](https://github.com/lordvitor11/ytdown.js/files/14161338/ytdown.js.zip)
 
 
 ## Hora de rodar (Source)
