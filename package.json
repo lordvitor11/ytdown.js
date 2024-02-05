@@ -1,0 +1,42 @@
+{
+  "name": "ytdownjs",
+  "version": "1.0.0",
+  "description": "Ferramenta simples e elegante para baixar músicas do YouTube!",
+  "main": "./index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "Vitor César(whoslv_)",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^28.2.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.18.2",
+    "ytdl-core": "^4.11.5"
+  },
+  "build": {
+    "extraFiles": [
+      {
+        "from": "src",
+        "to": "src"
+      },
+      {
+        "from": "utils",
+        "to": "utils"
+      }
+    ],
+    "appId": "com.whoslv.ytdownjs",
+    "productName": "ytdown.js",
+    "directories": {
+      "output": "dist"
+    },
+    "linux": {
+      "target": "appimage"
+    }
+  }
+}

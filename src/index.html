@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ytdown.js</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Criador</h1>
+        <div class="buttons">
+            <a href="https://youtube.com/c/lordvitor11" target="_blank"><button class="links">YouTube</button></a>
+            <a href="https://github.com/lordvitor11" target="_blank"><button class="links">GitHub</button></a>
+            <a href="https://instagram.com/whoslv_" target="_blank"><button class="links">Instagram</button></a> 
+        </div>
+    </div>
+    <div class="main">
+        <div class="center">
+            <div class="notification"><span>testando</span></div>
+            <h1>Adicione o link da música que deseja baixar:</h1>
+            <input type="text" id="link" autocomplete="off">
+            <input id="add" type="button" value="Adicionar">
+            <input class="disabled" id="download" type="button" value="Continuar" disabled>
+        </div>
+    </div>
+    <script src="script.js" type="module"></script>
+    <script type="module">
+        import { adc, baixar } from './script.js';
+        document.querySelector('#add').addEventListener('click', adc);
+        document.querySelector('#download').addEventListener('click', baixar);
+    </script>
+</body>
+</html>

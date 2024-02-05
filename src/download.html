@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ytdown.js - Download</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Criador</h1>
+        <div class="buttons">
+            <a href="https://youtube.com/c/lordvitor11" target="_blank"><button class="links">YouTube</button></a>
+            <a href="https://github.com/lordvitor11" target="_blank"><button class="links">GitHub</button></a>
+            <a href="https://instagram.com/whoslv_" target="_blank"><button class="links">Instagram</button></a> 
+        </div>
+    </div>
+    <div class="main">
+        <div class="center">
+            <div class="notification"><span>whoslv_</span></div>
+            <h1 id="result">Suas músicas estão sendo baixadas, aguarde...</h1>
+        </div>
+    </div>
+    
+    <script src="script.js" type="module"></script>
+    <script type="module">
+        import { downloadSong, increaseProgress } from './script.js';
+        window.onload = downloadSong(); 
+    </script>
+</body>
+</html>
